@@ -33,6 +33,45 @@ const Nav = () => {
         />
         <p className="logo_text">Promptopia</p>
       </Link>
+
+      <div className="sm:flex hidden">
+        {isUserLoggedIn ? (
+          <div className="flex gap-3 md:gap-5">
+            <Link href={"/create-prompt"} className="black_btn">
+              Create Post
+            </Link>
+
+            <button className="outline_btn" type="button" onClick={signOut}>
+              Sign Out
+            </button>
+
+            <Link href={"/profile"}>
+              <Image 
+                src={"/assets/images/logo.svg"}
+                width={37}
+                height={37}
+                className="rounded-full"
+                alt="Profile"
+              />
+            </Link>
+          </div>
+        ) : (
+          <>
+            {
+              providers && Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className="black_btn"
+                >
+                  Sign In
+                </button>
+              ))
+            }
+          </>
+        )}
+      </div>
     </nav>
   );
 };
